@@ -13,7 +13,7 @@ public class SetNavigationTarget: MonoBehaviour {
   [SerializeField] private TMP_Dropdown navigationTargetDropDown;//drop down for targets
   [SerializeField] private List < Target > navigationTargetObjects = new List < Target > ();
   [SerializeField] private SpeechInput speechInput;
-
+  
   public AudioMsg audioMsg;
   private NavMeshPath path;
   private LineRenderer line;
@@ -33,10 +33,9 @@ public class SetNavigationTarget: MonoBehaviour {
   async void Start() {
     path = new NavMeshPath();
     line = transform.GetComponent < LineRenderer > ();
-    SetCurrentNavigationTarget(2);
+    // SetCurrentNavigationTarget(2);
     await Task.Delay(3000);
     setGuide();
-    // speechInput.AzureSpeechToText();
   }
 
   // runs everytime 
@@ -51,13 +50,13 @@ public class SetNavigationTarget: MonoBehaviour {
 
    async void setGuide() {
     // guide.transform.position = transform.position + (2f * transform.forward); // place the guide in same position of the user
-    // await audioMsg.PlayAudio(selectMsg(Constants.WelcomeMessages));
+      // await audioMsg.PlayAudio(selectMsg(Constants.WelcomeMessages));
     // setRotation(transform.position , guide.transform.position);
   }
 
   void OnButtonClick2() {
     Debug.Log("Button clicked!");
-    SetCurrentNavigationTarget(2);
+    // SetCurrentNavigationTarget(2);
   }
 
   void move() {

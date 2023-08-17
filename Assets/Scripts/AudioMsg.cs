@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using Microsoft.CognitiveServices.Speech;
 using System.Threading.Tasks;
-
+using CrazyMinnow.SALSA.TextSync;
 public class AudioMsg : MonoBehaviour
 {
     private Animator anim;
-
+   private SalsaTextSync salsaTextSync;
     private void Start(){    
         anim = GetComponent<Animator>();
+        salsaTextSync = GetComponent<SalsaTextSync>();
     }
     public async Task PlayAudio(string textMessage){   
-        anim.SetFloat("Action", 0.5f); // action: 0.5 -> talking
+        // anim.SetFloat("Action", 0.5f); // action: 0.5 -> talking
+        salsaTextSync.Say(textMessage);
         await AzureVoice(textMessage);
         anim.SetFloat("Action", 0f); // action: 0 -> idle
     }

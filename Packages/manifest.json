@@ -1,11 +1,14 @@
 {
   "dependencies": {
+    "com.atteneder.gltfast": "https://github.com/atteneder/glTFast.git#v5.0.0",
     "com.microsoft.mixedreality.openxr": "file:MixedReality/com.microsoft.mixedreality.openxr-1.8.0.tgz",
     "com.microsoft.mixedreality.toolkit.examples": "file:MixedReality/com.microsoft.mixedreality.toolkit.examples-2.8.3.tgz",
     "com.microsoft.mixedreality.toolkit.extensions": "file:MixedReality/com.microsoft.mixedreality.toolkit.extensions-2.8.3.tgz",
     "com.microsoft.mixedreality.toolkit.foundation": "file:MixedReality/com.microsoft.mixedreality.toolkit.foundation-2.8.3.tgz",
     "com.microsoft.mixedreality.toolkit.standardassets": "file:MixedReality/com.microsoft.mixedreality.toolkit.standardassets-2.8.3.tgz",
     "com.microsoft.mixedreality.toolkit.tools": "file:MixedReality/com.microsoft.mixedreality.toolkit.tools-2.8.3.tgz",
+    "com.readyplayerme.core": "https://github.com/readyplayerme/rpm-unity-sdk-core.git",
+    "com.readyplayerme.webview": "https://github.com/readyplayerme/rpm-unity-sdk-webview.git#v1.2.1",
     "com.unity.cinemachine": "2.8.9",
     "com.unity.ext.nunit": "1.0.6",
     "com.unity.feature.development": "1.0.1",

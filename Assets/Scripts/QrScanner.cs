@@ -38,7 +38,7 @@ public class QrScanner : MonoBehaviour
         });
     }
     }
-    private void RecenterCamera(string target){
+    public void RecenterCamera(string target){
         Target currentLocation = qrRecenterPositions.Find(x=>x.Name.Equals(QrData, StringComparison.OrdinalIgnoreCase));    
         if (currentLocation !=null ){
             MixedRealityPlaySpace.transform.position =  currentLocation.PositionObject.transform.position;
