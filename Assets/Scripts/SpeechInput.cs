@@ -76,6 +76,10 @@ public class SpeechInput : MonoBehaviour
         Debug.Log("inside the method: goto214");
         setNavigationTarget.SetCurrentNavigationTarget(2);
     }
+    public void goto216(){
+        Debug.Log("inside the method: goto216");
+        setNavigationTarget.SetCurrentNavigationTarget(3);
+    }
 
 }
 

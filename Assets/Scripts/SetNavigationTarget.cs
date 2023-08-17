@@ -33,7 +33,7 @@ public class SetNavigationTarget: MonoBehaviour {
   async void Start() {
     path = new NavMeshPath();
     line = transform.GetComponent < LineRenderer > ();
-    // SetCurrentNavigationTarget(3);
+    SetCurrentNavigationTarget(2);
     await Task.Delay(3000);
     setGuide();
     // speechInput.AzureSpeechToText();
@@ -51,7 +51,7 @@ public class SetNavigationTarget: MonoBehaviour {
 
    async void setGuide() {
     // guide.transform.position = transform.position + (2f * transform.forward); // place the guide in same position of the user
-    await audioMsg.PlayAudio(selectMsg(Constants.WelcomeMessages));
+    // await audioMsg.PlayAudio(selectMsg(Constants.WelcomeMessages));
     // setRotation(transform.position , guide.transform.position);
   }
 
@@ -92,7 +92,7 @@ public class SetNavigationTarget: MonoBehaviour {
   async void reached() {
     setRotation(transform.position, guide.transform.position);
     finishReached = true;
-    await audioMsg.PlayAudio(selectMsg(Constants.DestinationMessages));
+    // await audioMsg.PlayAudio(selectMsg(Constants.DestinationMessages));
   }  
   
   async public void SetCurrentNavigationTarget(int selectedValue) {
