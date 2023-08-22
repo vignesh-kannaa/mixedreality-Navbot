@@ -6,15 +6,25 @@ using System.IO;
 using System.Threading.Tasks;
 using Microsoft.CognitiveServices.Speech;
 using Microsoft.CognitiveServices.Speech.Audio;
+using UnityEngine.SceneManagement;
 
 public class SpeechInput : MonoBehaviour
 {   
     public AudioMsg audioMsg;
     public SetNavigationTarget setNavigationTarget;
+    async public void StartScene2(){
+        Debug.Log("inside the method: startscene2");
+        SceneManager.LoadSceneAsync(1);
+    }
+    public void QuitApplication(){
+        Debug.Log("inside the method: Quit");
+        Application.Quit();
+    }
     public void goto212(){
         Debug.Log("inside the method: goto212");
         setNavigationTarget.SetCurrentNavigationTarget(1);
     }
+    
     
     public void HeyLuna(){
         Debug.Log("inside the HeyLuna");
@@ -67,9 +77,7 @@ public class SpeechInput : MonoBehaviour
         HttpRequest httpRequest = new HttpRequest();
         string response = await httpRequest.CallApiAndGetResponse(apiUrl, jsonData);
         Debug.Log("API response: " + response);
-        string updatedRes = response.Substring(11);
-        Debug.Log("API response: " + updatedRes);
-        var res = updatedRes;
+        var res = response;
         await audioMsg.PlayAudio(res);
     }
     public void goto214(){
@@ -80,7 +88,6 @@ public class SpeechInput : MonoBehaviour
         Debug.Log("inside the method: goto216");
         setNavigationTarget.SetCurrentNavigationTarget(3);
     }
-
 }
 
 

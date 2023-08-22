@@ -14,7 +14,8 @@ public class QrScanner : MonoBehaviour
     [SerializeField] private List<Target> qrRecenterPositions = new List<Target>() ;
     [SerializeField] private GameObject MixedRealityPlaySpace;
     private string QrData = ""; 
-    
+    public SetNavigationTarget setNavigationTarget;
+
     async void Start()
     {
         var accessStatus = await QRCodeWatcher.RequestAccessAsync();
@@ -39,13 +40,18 @@ public class QrScanner : MonoBehaviour
     }
     }
     public void RecenterCamera(string target){
+        Debug.Log("inside the recenter camera: "+ target);
         Target currentLocation = qrRecenterPositions.Find(x=>x.Name.Equals(QrData, StringComparison.OrdinalIgnoreCase));    
         if (currentLocation !=null ){
             MixedRealityPlaySpace.transform.position =  currentLocation.PositionObject.transform.position;
             MixedRealityPlaySpace.transform.rotation = currentLocation.PositionObject.transform.rotation;
+            if (target ==  "StartPoint"){
+                setNavigationTarget.setGuide();
+            }
         }else{
             Debug.Log("Current location is not found!");
         }
+
         
     }
 }

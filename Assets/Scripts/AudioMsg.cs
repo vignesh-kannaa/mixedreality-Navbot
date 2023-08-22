@@ -13,7 +13,7 @@ public class AudioMsg : MonoBehaviour
         salsaTextSync = GetComponent<SalsaTextSync>();
     }
     public async Task PlayAudio(string textMessage){   
-        // anim.SetFloat("Action", 0.5f); // action: 0.5 -> talking
+        anim.SetFloat("Action", 0.5f); // action: 0.5 -> talking
         salsaTextSync.Say(textMessage);
         await AzureVoice(textMessage);
         anim.SetFloat("Action", 0f); // action: 0 -> idle

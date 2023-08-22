@@ -28,14 +28,15 @@ public class SetNavigationTarget: MonoBehaviour {
   private bool targetReached = false; // to run the fucntion only once
   private bool targetSelected = false;
   private bool finishReached = false;
+  private bool startedFlag = true;
 
   // runs only once at the start
   async void Start() {
     path = new NavMeshPath();
     line = transform.GetComponent < LineRenderer > ();
     // SetCurrentNavigationTarget(2);
-    await Task.Delay(3000);
-    setGuide();
+    // await Task.Delay(3000);
+    // setGuide();
   }
 
   // runs everytime 
@@ -48,16 +49,20 @@ public class SetNavigationTarget: MonoBehaviour {
     }
   }
 
-   async void setGuide() {
-    // guide.transform.position = transform.position + (2f * transform.forward); // place the guide in same position of the user
-      // await audioMsg.PlayAudio(selectMsg(Constants.WelcomeMessages));
-    // setRotation(transform.position , guide.transform.position);
+   async public void setGuide() {
+    if (startedFlag ==  true){
+      startedFlag = false;
+      await Task.Delay(3000);
+      // guide.transform.position = transform.position + (2f * transform.forward); // place the guide in same position of the user
+      await audioMsg.PlayAudio(selectMsg(Constants.WelcomeMessages));
+      setRotation(transform.position , guide.transform.position);
+    }
   }
 
-  void OnButtonClick2() {
-    Debug.Log("Button clicked!");
-    // SetCurrentNavigationTarget(2);
-  }
+  // void OnButtonClick2() {
+  //   Debug.Log("Button clicked!");
+  //   // SetCurrentNavigationTarget(2);
+  // }
 
   void move() {
     NavMesh.CalculatePath(guide.transform.position, targetPosition, NavMesh.AllAreas, path);
@@ -65,7 +70,7 @@ public class SetNavigationTarget: MonoBehaviour {
     line.SetPositions(path.corners);
     line.enabled = true; //set the line size to 1 in line rendered property to hide it
     float distance = Vector3.Distance(guide.transform.position, transform.position); // distance bt user and guide
-    if (distance >= 3f) {
+    if (distance >= 5f) {
       anim.SetFloat("Action", 0f); // Set guide's action to idle
       // await audioMsg.PlayAudio(selectMsg(Constants.WaitingMessages));
       setRotation(transform.position, guide.transform.position);
@@ -89,18 +94,18 @@ public class SetNavigationTarget: MonoBehaviour {
   }
 
   async void reached() {
-    setRotation(transform.position, guide.transform.position);
     finishReached = true;
-    // await audioMsg.PlayAudio(selectMsg(Constants.DestinationMessages));
+    setRotation(transform.position, guide.transform.position);
+    await audioMsg.PlayAudio(selectMsg(Constants.DestinationMessages));
   }  
   
   async public void SetCurrentNavigationTarget(int selectedValue) {
-    // await audioMsg.PlayAudio(selectMsg(Constants.FollowMeMessages));
     targetPosition = Vector3.zero;
     string selectedText = navigationTargetDropDown.options[selectedValue].text;
     Target currentTarget = navigationTargetObjects.Find(x => x.Name.Equals(selectedText));
     Debug.Log("Current destination:" + currentTarget.Name);
     if (currentTarget != null) {
+      await audioMsg.PlayAudio(selectMsg(Constants.FollowMeMessages));
       targetPosition = currentTarget.PositionObject.transform.position;
       setActionFlags();
       setRotation(targetPosition, guide.transform.position);
