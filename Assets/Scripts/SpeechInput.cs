@@ -12,9 +12,9 @@ public class SpeechInput : MonoBehaviour
 {   
     public AudioMsg audioMsg;
     public SetNavigationTarget setNavigationTarget;
-    async public void StartScene2(){
-        Debug.Log("inside the method: startscene2");
-        SceneManager.LoadSceneAsync(1);
+    async public void StartApplication(){
+        Debug.Log("inside the method: StartApplication");
+        setNavigationTarget.setGuide();
     }
     public void QuitApplication(){
         Debug.Log("inside the method: Quit");
@@ -26,10 +26,10 @@ public class SpeechInput : MonoBehaviour
     }
     
     
-    public void HeyLuna(){
+    async public void HeyLuna(){
         Debug.Log("inside the HeyLuna");
+        await audioMsg.PlayAudio("YES");
         AzureSpeechToText();
-      // StartCoroutine(StartRecording());
     }
   
     async public void AzureSpeechToText(){
@@ -46,7 +46,7 @@ public class SpeechInput : MonoBehaviour
     }
     private async Task OutputSpeechRecognitionResult(SpeechRecognitionResult speechRecognitionResult)
     {
-        // Debug.Log("inside the OutputSpeechRecognitionResult: ");
+        Debug.Log("inside the OutputSpeechRecognitionResult: ");
         switch (speechRecognitionResult.Reason)
         {
             case ResultReason.RecognizedSpeech:
@@ -72,7 +72,7 @@ public class SpeechInput : MonoBehaviour
 
    private async Task Chatterbot(string text){
         Debug.Log("input from  user: "+ text);
-        string apiUrl = "http://127.0.0.1:5000/api/chat";
+        string apiUrl = "https://chatgpt-navbot.azurewebsites.net/api/chat";
         string jsonData = "{\"msg\":\"" + text + "\"}";
         HttpRequest httpRequest = new HttpRequest();
         string response = await httpRequest.CallApiAndGetResponse(apiUrl, jsonData);
@@ -89,27 +89,3 @@ public class SpeechInput : MonoBehaviour
         setNavigationTarget.SetCurrentNavigationTarget(3);
     }
 }
-
-
-
-
-    // private IEnumerator StartRecording()
-    // {
-    //     // Start audio input, providing the device's microphone as the audio source
-    //     var audioClip = Microphone.Start(null, true, 5, AudioSettings.outputSampleRate);
-
-    //     // Wait for the specified duration (5 seconds in this example)
-    //     yield return new WaitForSeconds(5f);
-
-    //     // Stop recording audio
-    //     Microphone.End(null);
-
-    //     // Save the recorded audio clip
-    //     recordedClip = AudioClip.Create("RecordedClip", audioClip.samples, audioClip.channels, audioClip.frequency, false);
-    //     float[] data = new float[audioClip.samples * audioClip.channels];
-    //     audioClip.GetData(data, 0);
-    //     recordedClip.SetData(data, 0);
-        
-    //     // Process the recorded audio clip (e.g., send it to your speech recognition service)
-    //     SpeechToText(recordedClip);
-    // }

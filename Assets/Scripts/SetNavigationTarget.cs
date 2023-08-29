@@ -13,7 +13,8 @@ public class SetNavigationTarget: MonoBehaviour {
   [SerializeField] private TMP_Dropdown navigationTargetDropDown;//drop down for targets
   [SerializeField] private List < Target > navigationTargetObjects = new List < Target > ();
   [SerializeField] private SpeechInput speechInput;
-  
+  [SerializeField] private QrScanner qrScanner;
+
   public AudioMsg audioMsg;
   private NavMeshPath path;
   private LineRenderer line;
@@ -22,7 +23,7 @@ public class SetNavigationTarget: MonoBehaviour {
 
   // initialising values
   private int cornerIndex = 0;
-  private float moveSpeed = 0.3f; // Adjust this value to control the speed of the guide.
+  private float moveSpeed = 0.5f; // Adjust this value to control the speed of the guide.
 
   // creating flags
   private bool targetReached = false; // to run the fucntion only once
@@ -37,12 +38,16 @@ public class SetNavigationTarget: MonoBehaviour {
     // SetCurrentNavigationTarget(2);
     // await Task.Delay(3000);
     // setGuide();
+    // qrScanner.RecenterCamera("StartPoint");
   }
 
   // runs everytime 
   private void Update() {
     if (targetSelected && !targetReached) {
       move();
+    }
+    else{
+      setRotation(transform.position , guide.transform.position);
     }
     if (!finishReached && targetReached) {
       reached();
@@ -52,10 +57,12 @@ public class SetNavigationTarget: MonoBehaviour {
    async public void setGuide() {
     if (startedFlag ==  true){
       startedFlag = false;
-      await Task.Delay(3000);
-      // guide.transform.position = transform.position + (2f * transform.forward); // place the guide in same position of the user
-      await audioMsg.PlayAudio(selectMsg(Constants.WelcomeMessages));
+      Debug.Log("setguide initiated");
+      // await Task.Delay(5000);
       setRotation(transform.position , guide.transform.position);
+      // guide.transform.position = transform.position + (2f * transform.forward); // place the guide in same position of the user
+      // await audioMsg.PlayAudio(selectMsg(Constants.WelcomeMessages));
+      // await audioMsg.PlayAudio(Constants.Introduction);
     }
   }
 
@@ -95,7 +102,9 @@ public class SetNavigationTarget: MonoBehaviour {
 
   async void reached() {
     finishReached = true;
-    setRotation(transform.position, guide.transform.position);
+    // setRotation(transform.position, guide.transform.position);
+    Quaternion newRotation = guide.transform.rotation * Quaternion.Euler(0, 180, 0);
+    guide.transform.rotation = newRotation;
     await audioMsg.PlayAudio(selectMsg(Constants.DestinationMessages));
   }  
   
@@ -124,7 +133,15 @@ public class SetNavigationTarget: MonoBehaviour {
   // use this function to test in UI game mode
   public void SetCurrentLocation(int selectedValue) {
     Debug.Log("Current destination:" + selectedValue);
-    // qrScanner.recenterCamera("R214");
+    if(selectedValue == 3){
+      qrScanner.RecenterCamera("StartPoint");  
+    }
+    if(selectedValue == 1){
+      qrScanner.RecenterCamera("R212");
+    }
+    if(selectedValue == 2){
+      qrScanner.RecenterCamera("R214");
+    }
   }
   // helper functions
   private string selectMsg(List < string > messageList) {

@@ -8,7 +8,7 @@ public class AudioMsg : MonoBehaviour
 {
     private Animator anim;
    private SalsaTextSync salsaTextSync;
-    private void Start(){    
+    private void Start(){
         anim = GetComponent<Animator>();
         salsaTextSync = GetComponent<SalsaTextSync>();
     }
