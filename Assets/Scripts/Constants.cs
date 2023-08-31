@@ -3,13 +3,13 @@ using System.Collections.Generic;
 public class Constants{
     
     public static List<string> WelcomeMessages = new List<string>{
-        "Welcome to NavBot! Let's get started!",
-        "Hello! NavBot is ready to assist you!",
-        "Greetings! Choose your destination with NavBot!",
-        "Welcome to NavBot! Select where you want to go!",
-        "Hi there! NavBot is at your service. Pick a destination!"
+        "Welcome to NavBot! I'm Luna",
+        "Hello! Luna Here is ready to assist you!",
+        "Greetings! I'm Luna. Choose your destination with NavBot!",
+        "Welcome to NavBot! Myself Luna. Select where you want to go!",
+        "Hi there! Luna is at your service. Pick a destination!"
     };
-    public static string Introduction = "I can navigate to your desired destination. For now, I can navigate only from 212 to 214. You can say 'GOTO 212'. Apart from that You can ask me questions about this building by saying 'Hey Luna!'. I'm currently trained on few data, so my knowledge is restricted - I'll try my best to answer your question";
+    public static string Introduction = "I can navigate to your desired destination. For now, I can navigate only from 212 to 214. You can say 'GOTO 212'. Additionally You can ask me questions about this building by saying 'Hey Luna!'. I'm currently trained on few data, so my knowledge is restricted";
     public static List<string> DestinationMessages = new List<string>{
         "Destination Reached!",
         "You've Arrived!",

@@ -23,7 +23,7 @@ public class SetNavigationTarget: MonoBehaviour {
 
   // initialising values
   private int cornerIndex = 0;
-  private float moveSpeed = 0.5f; // Adjust this value to control the speed of the guide.
+  private float moveSpeed = 0.6f; // Adjust this value to control the speed of the guide.
 
   // creating flags
   private bool targetReached = false; // to run the fucntion only once
@@ -37,7 +37,7 @@ public class SetNavigationTarget: MonoBehaviour {
     line = transform.GetComponent < LineRenderer > ();
     // SetCurrentNavigationTarget(2);
     // await Task.Delay(3000);
-    // setGuide();
+    setGuide();
     // qrScanner.RecenterCamera("StartPoint");
   }
 
@@ -58,10 +58,11 @@ public class SetNavigationTarget: MonoBehaviour {
     if (startedFlag ==  true){
       startedFlag = false;
       Debug.Log("setguide initiated");
-      // await Task.Delay(5000);
+      await Task.Delay(5000);
       setRotation(transform.position , guide.transform.position);
       // guide.transform.position = transform.position + (2f * transform.forward); // place the guide in same position of the user
       // await audioMsg.PlayAudio(selectMsg(Constants.WelcomeMessages));
+      // await Task.Delay(500);
       // await audioMsg.PlayAudio(Constants.Introduction);
     }
   }
@@ -114,7 +115,7 @@ public class SetNavigationTarget: MonoBehaviour {
     Target currentTarget = navigationTargetObjects.Find(x => x.Name.Equals(selectedText));
     Debug.Log("Current destination:" + currentTarget.Name);
     if (currentTarget != null) {
-      await audioMsg.PlayAudio(selectMsg(Constants.FollowMeMessages));
+      // await audioMsg.PlayAudio(selectMsg(Constants.FollowMeMessages));
       targetPosition = currentTarget.PositionObject.transform.position;
       setActionFlags();
       setRotation(targetPosition, guide.transform.position);

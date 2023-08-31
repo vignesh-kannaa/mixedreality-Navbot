@@ -49,11 +49,6 @@ public class QrScanner : MonoBehaviour
             Debug.Log("QR target: "+ target);
             MixedRealityPlaySpace.transform.position =  currentLocation.PositionObject.transform.position;
             MixedRealityPlaySpace.transform.rotation = currentLocation.PositionObject.transform.rotation;
-            // mainCamera.transform.localPosition = Vector3.zero;
-            // mainCamera.transform.localRotation = Quaternion.Euler(0, -90, 0);
-            // if (target ==  "StartPoint"){
-            //     setNavigationTarget.setGuide();
-            // }
         }else{
             Debug.Log("Current location is not found!");
         }    
