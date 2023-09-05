@@ -61,9 +61,9 @@ public class SetNavigationTarget: MonoBehaviour {
       await Task.Delay(5000);
       setRotation(transform.position , guide.transform.position);
       // guide.transform.position = transform.position + (2f * transform.forward); // place the guide in same position of the user
-      // await audioMsg.PlayAudio(selectMsg(Constants.WelcomeMessages));
-      // await Task.Delay(500);
-      // await audioMsg.PlayAudio(Constants.Introduction);
+      await audioMsg.PlayAudio(selectMsg(Constants.WelcomeMessages));
+      await Task.Delay(500);
+      await audioMsg.PlayAudio(Constants.Introduction);
     }
   }
 
